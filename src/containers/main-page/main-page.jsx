@@ -1,7 +1,20 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
+
+import { BooksContext } from '../../store'
+import { BooksList } from './components'
 
 const MainPage = () => {
-  return <div>MainPage</div>
+  const { fetchBooks } = useContext(BooksContext)
+
+  useEffect(() => {
+    fetchBooks()
+  }, [])
+
+  return (
+    <>
+      <BooksList />
+    </>
+  )
 }
 
 export default MainPage

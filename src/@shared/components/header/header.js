@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { ToggleForDarkLightTheme } from '../../../@shared/components/buttons'
+import { ToggleForDarkLightTheme, AddToShelf } from '../../../@shared/components'
+
 
 const Header = () => {
   return (
@@ -15,6 +16,7 @@ const Header = () => {
         </li>
       </ul>
       <ToggleForDarkLightTheme />
+      <AddToShelf />
     </div>
   )
 }

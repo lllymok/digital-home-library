@@ -4,7 +4,7 @@ import { purple } from '@material-ui/core/colors'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 
-import { GlobalContext } from '../../../store';
+import GlobalContext from '../../../store/use-global-store/context';
 
 const PurpleSwitch = withStyles({
   switchBase: {
