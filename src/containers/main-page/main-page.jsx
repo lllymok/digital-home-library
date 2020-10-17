@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react'
 
-import { BooksContext } from '../../store'
+import { GlobalContext } from '../../store'
 import { BooksList } from './components'
 
 const MainPage = () => {
-  const { fetchBooks } = useContext(BooksContext)
+  const { fetchBooks } = useContext(GlobalContext).booksStore
 
   useEffect(() => {
     fetchBooks()

@@ -2,10 +2,10 @@ import React, { useContext } from 'react'
 import styled from 'styled-components'
 
 import Book from './book'
-import { BooksContext } from '../../../store'
+import { GlobalContext } from '../../../store'
 
 const BooksList = () => {
-  const { books } = useContext(BooksContext)
+  const { books } = useContext(GlobalContext).booksStore
   return (
     <Container>
       {books.map((item) => (

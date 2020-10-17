@@ -1,11 +1,11 @@
 import React, { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import { AddToShelf } from './compoents'
-import { BooksContext } from '../../store'
+import { GlobalContext } from '../../store'
 
 const MainPage = () => {
   const { id } = useParams()
-  const { fetchBookDetails, bookDetails } = useContext(BooksContext)
+  const { fetchBookDetails, bookDetails } = useContext(GlobalContext).booksStore
 
   useEffect(() => {
     fetchBookDetails(id)

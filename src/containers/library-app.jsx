@@ -16,14 +16,14 @@ import {
 } from '../store'
 
 const Main = () => {
-  const { isLightTheme } = useContext(GlobalContext)
+  const { isLightTheme } = useContext(GlobalContext).global
 
   return (
     <ThemeProvider theme={!isLightTheme ? darkTheme : lightTheme}>
       <>
         <GlobalStyles />
-        <ShelvesStateProvider>
-          <BooksStateProvider>
+        {/* <BooksStateProvider> */}
+          {/* <ShelvesStateProvider> */}
             <Router>
               <Header />
               <Wrapper>
@@ -34,8 +34,8 @@ const Main = () => {
                 </Switch>
               </Wrapper>
             </Router>
-          </BooksStateProvider>
-        </ShelvesStateProvider>
+          {/* </ShelvesStateProvider> */}
+        {/* </BooksStateProvider> */}
       </>
     </ThemeProvider>
   )

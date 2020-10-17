@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Input, Select, InputLabel, FormControl } from '@material-ui/core'
 import styled from 'styled-components'
 
-import { BooksContext, ShelvesContext } from '../../../store'
+import { GlobalContext } from '../../../store'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -17,8 +17,15 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const AddToShelf = () => {
-  const { booksCategories, fetchBooksCategories, bookDetails } = useContext(BooksContext)
-  const { shelves, addBookToShelf } = useContext(ShelvesContext)
+  const { shelvesStore, booksStore } = useContext(GlobalContext)
+  const { shelves, addBookToShelf, booksWithShelf } = shelvesStore
+  const {
+    fetchBooksCategories,
+    bookDetails,
+    booksCategories,
+    addShelfForBook,
+  } = booksStore
+
   const classes = useStyles()
 
   const [shelfName, setShelfName] = useState('')
@@ -35,7 +42,20 @@ const AddToShelf = () => {
     addBookToShelf(bookDetails, shelfId)
   }
 
-
+  const bookId = bookDetails.id
+  if (booksWithShelf[bookId]) {
+    return (
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor='age-native-simple'>Slected shelf</InputLabel>
+        <Select native disabled value={booksWithShelf[bookId]}>
+        <option aria-label='None' value='' />
+          <option aria-label='None' value={booksWithShelf[bookId]}>
+            {booksWithShelf[bookId].name}
+          </option>
+        </Select>
+      </FormControl>
+    )
+  }
 
   return (
     <FormControl className={classes.formControl}>

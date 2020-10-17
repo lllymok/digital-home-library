@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core'
 import styled from 'styled-components'
 
-import { BooksContext, ShelvesContext } from '../../../store'
+import { GlobalContext } from '../../../store'
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -23,16 +23,15 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const CreateShelfForm = ({ onClose }) => {
-  const { booksCategories, fetchBooksCategories } = useContext(BooksContext)
-  const { createShelf } = useContext(ShelvesContext)
+  const { shelvesStore, booksStore } = useContext(GlobalContext)
+  const { createShelf } = shelvesStore
+  const { booksCategories } = booksStore
+
+
   const classes = useStyles()
 
   const [shelfName, setShelfName] = useState('')
   const [shelfCategory, setShelfCategory] = useState({})
-
-  useEffect(() => {
-    fetchBooksCategories()
-  }, [])
 
   const onChangeShelfName = (event) => setShelfName(event.target.value)
 

@@ -1,15 +1,9 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 
-import { ShelvesContext } from '../../store'
+import { GlobalContext } from '../../store'
 
 const Shalves = () => {
-  const { shelves } = useContext(ShelvesContext)
-  const gg = useContext(ShelvesContext)
-  console.log(gg)
-
-  useEffect(() => {
-    // fetchBooks()
-  }, [])
+  const { shelves, shelvesBooks } = useContext(GlobalContext).shelvesStore
 
   if (!shelves.length) {
     return null
@@ -17,13 +11,13 @@ const Shalves = () => {
 
   return (
     <>
-      {shelves.map(({id,  name, category, books }) => (
+      {shelves.map(({ id, name, category }) => (
         <div key={id}>
           <div key={name}>
             {name} - {category.name}
           </div>
           <div>
-            {books.map(({ name, id }) => (
+            {shelvesBooks[id]?.map(({ name, id }) => (
               <div key={id}>{name}</div>
             ))}
           </div>

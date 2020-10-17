@@ -1,14 +1,11 @@
-import { useReducer, useContext } from 'react'
+import { useReducer } from 'react'
 import { v4 as uuidv4 } from 'uuid'
-
-import { GlobalContext } from '../../store'
 
 const initialState = {
   shelves: [
     {
       id: 'b768d286-9eea-4add-8d07-733275fee056',
       name: 'Level2',
-      books: [],
       category: {
         id: 2,
         name: 'fantasy',
@@ -17,13 +14,14 @@ const initialState = {
     {
       id: 'df1977ad-2a0e-40ff-9b16-d30ee433d4fb',
       name: 'level1',
-      books: [],
       category: {
         id: 2,
         name: 'fantasy',
       },
     },
   ],
+  shelvesBooks: {},
+  booksWithShelf: {},
   shelf: {},
 }
 
@@ -40,10 +38,12 @@ const reducer = (state, { type, payload }) => {
         shelves: payload,
       }
     case 'ADD_BOOK_TO_SHELF':
-      state.shelves
-        .find(({ id }) => id === payload.shelfId)
-        .books.unshift(payload.book)
-      return { ...state }
+      return { ...state, shelvesBooks: { ...state.shelvesBooks, ...payload } }
+    case 'ADD_SHELF_TO_BOOK':
+      return {
+        ...state,
+        booksWithShelf: { ...state.booksWithShelf, ...payload },
+      }
 
     default: {
       return state
@@ -53,10 +53,6 @@ const reducer = (state, { type, payload }) => {
 
 const useShelvesState = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
-  const gg = useContext(GlobalContext)
-  console.log(gg, 'g')
-  // const { addShelfForBook } = useContext(GlobalContext).books
-
 
   const createShelf = (shelfDetails) => {
     dispatch({
@@ -65,12 +61,30 @@ const useShelvesState = () => {
     })
   }
 
-  const addBookToShelf = (book, shelfId) => {
+  const addShelfToBook = (bookId, shelfId) => {
+    const shelfById = state.shelves.find(({ id }) => id === shelfId)
     dispatch({
-      type: 'ADD_BOOK_TO_SHELF',
-      payload: { shelfId, book },
+      type: 'ADD_SHELF_TO_BOOK',
+      payload: { [bookId]: shelfById },
     })
-    // addShelfForBook(shelfId);
+  }
+
+  const addBookToShelf = (book, shelfId) => {
+    const booksByShelfId = state.shelvesBooks[shelfId]
+
+    if (booksByShelfId) {
+      dispatch({
+        type: 'ADD_BOOK_TO_SHELF',
+        payload: { [shelfId]: [book, ...booksByShelfId] },
+      })
+    } else {
+      dispatch({
+        type: 'ADD_BOOK_TO_SHELF',
+        payload: { [shelfId]: [book] },
+      })
+    }
+
+    addShelfToBook(book.id, shelfId)
   }
 
   return { ...state, createShelf, addBookToShelf }

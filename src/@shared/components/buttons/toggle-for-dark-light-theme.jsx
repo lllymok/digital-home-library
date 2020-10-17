@@ -22,7 +22,7 @@ const PurpleSwitch = withStyles({
 
 export default function CustomizedSwitches() {
 
-  const { toggleTheme } = useContext(GlobalContext)
+  const { toggleTheme } = useContext(GlobalContext).global
   const [state, setState] = React.useState({
     checkedA: true,
     checkedB: true,

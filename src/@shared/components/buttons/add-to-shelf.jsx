@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useContext } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 
 import { CreateShelfForm } from '../../../@shared/components'
 import { useCreateShelfModal } from '../../../@shared/hooks'
+import { GlobalContext } from '../../../store'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,7 +16,12 @@ const useStyles = makeStyles((theme) => ({
 
 const AddToShelf = () => {
   const { openShelfModal, ShelfModal, closeShelfModal } = useCreateShelfModal()
+  const { fetchBooksCategories} = useContext(GlobalContext).booksStore
+
   const classes = useStyles()
+  useEffect(() => {
+    fetchBooksCategories()
+  }, [])
 
   return (
     <div className={classes.root}>
