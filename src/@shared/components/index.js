@@ -1,4 +1,5 @@
 export { default as Header } from './header/header'
+export { default as Reviews } from './reviews/reviews'
 export * from './buttons'
 export * from './modals'
 export * from './forms'

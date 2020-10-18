@@ -1,11 +1,13 @@
 import { useReducer } from 'react'
 
 import api from '../../api'
+import { countRatingAverage } from '../../@shared/helpers'
 
 const initialState = {
   books: [],
   booksCategories: [],
   bookDetails: {},
+  booksReviews: {},
 }
 const reducer = (state, { type, payload }) => {
   switch (type) {
@@ -13,6 +15,11 @@ const reducer = (state, { type, payload }) => {
       return {
         ...state,
         books: payload,
+      }
+    case 'ADD_RATING_FOR_BOOK':
+      return {
+        ...state,
+        bookDetails: payload,
       }
     case 'FETCH_BOOK_DETAILS':
       return {
@@ -28,6 +35,11 @@ const reducer = (state, { type, payload }) => {
       return {
         ...state,
         booksCategories: payload,
+      }
+    case 'SEND_REVIEW':
+      return {
+        ...state,
+        booksReviews: { ...state.booksReviews, ...payload },
       }
     default: {
       return state
@@ -66,7 +78,34 @@ const useBooksState = () => {
     }
   }
 
-  return { ...state, fetchBooks, fetchBooksCategories, fetchBookDetails }
+  const addAverageRatingForBook = (bookId, booksWithReviews) => {
+    const averageRating = countRatingAverage(booksWithReviews[bookId])
+    state.bookDetails.rating = averageRating
+    dispatch({type: 'ADD_RATING_FOR_BOOK', payload: state.bookDetails})
+  }
+
+  const sendReview = async (bookId, review) => {
+    if (state.booksReviews[bookId]) {
+      dispatch({
+        type: 'SEND_REVIEW',
+        payload: { [bookId]: [review, ...state.booksReviews[bookId]] },
+      })
+      addAverageRatingForBook(bookId, {
+        [bookId]: [review, ...state.booksReviews[bookId]],
+      })
+    } else {
+      dispatch({ type: 'SEND_REVIEW', payload: { [bookId]: [review] } })
+      addAverageRatingForBook(bookId, { [bookId]: [review] })
+    }
+  }
+
+  return {
+    ...state,
+    fetchBooks,
+    fetchBooksCategories,
+    fetchBookDetails,
+    sendReview,
+  }
 }
 
 export default useBooksState

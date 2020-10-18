@@ -14,6 +14,9 @@ const Header = () => {
         <li>
           <Link to='/shelves'>Shelves</Link>
         </li>
+        <li>
+          <Link to='/shelves-with-reviews'>Shelves with Reviews</Link>
+        </li>
       </ul>
       <ToggleForDarkLightTheme />
       <AddToShelf />

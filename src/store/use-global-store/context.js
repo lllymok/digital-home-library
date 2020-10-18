@@ -4,19 +4,24 @@ const booksStore = {
   books: [],
   booksCategories: [],
   bookDetails: {},
+  booksReviews: {},
   fetchBookDetails: () => {},
   fetchBooks: () => {},
   fetchBooksCategories: () => {},
   addShelfForBook: () => {},
+  sendReview: () => {},
 }
 
 const shelvesStore = {
   shelves: [],
   shelvesBooks: {},
-  shelf: {},
   booksWithShelf: {},
+  shelfReviews: {},
+  shelfDetails: {},
   createShelf: () => {},
   addBookToShelf: () => {},
+  sendShelfReview: () => {},
+  fetchShelfDetails: () => {},
 }
 
 const global = {

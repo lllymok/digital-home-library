@@ -5,14 +5,15 @@ import styled from 'styled-components'
 
 import { GlobalStyles, lightTheme, darkTheme } from '../@shared/styled'
 import { Header } from '../@shared/components'
+
 import MainPage from './main-page/main-page'
 import BookDetails from './book-details/book-details'
-import Shalves from './shelves/shelves'
+import Shelves from './shelves/shelves'
+import ShelvesList from './shelves-list/shelf-list'
+import ShelfDetails from './shelf-details/shelf-details'
 
 import {
-  BooksStateProvider,
   GlobalContext,
-  ShelvesStateProvider,
 } from '../store'
 
 const Main = () => {
@@ -22,20 +23,18 @@ const Main = () => {
     <ThemeProvider theme={!isLightTheme ? darkTheme : lightTheme}>
       <>
         <GlobalStyles />
-        {/* <BooksStateProvider> */}
-          {/* <ShelvesStateProvider> */}
             <Router>
               <Header />
               <Wrapper>
                 <Switch>
                   <Route exact path='/' component={MainPage} />
                   <Route path='/books/details/:id' component={BookDetails} />
-                  <Route path='/shelves' component={Shalves} />
+                  <Route path='/shelves' component={Shelves} />
+                  <Route exact path='/shelves-with-reviews' component={ShelvesList} />
+                  <Route path='/shelves-with-reviews/:id' component={ShelfDetails} />
                 </Switch>
               </Wrapper>
             </Router>
-          {/* </ShelvesStateProvider> */}
-        {/* </BooksStateProvider> */}
       </>
     </ThemeProvider>
   )

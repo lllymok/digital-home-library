@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 }))
 
 const AddToShelf = () => {
+  const classes = useStyles()
   const { shelvesStore, booksStore } = useContext(GlobalContext)
   const { shelves, addBookToShelf, booksWithShelf } = shelvesStore
   const {
@@ -26,7 +27,7 @@ const AddToShelf = () => {
     addShelfForBook,
   } = booksStore
 
-  const classes = useStyles()
+  const { id, category: categoryName } = bookDetails
 
   const [shelfName, setShelfName] = useState('')
   const [shelfCategory, setShelfCategory] = useState({})
@@ -35,26 +36,19 @@ const AddToShelf = () => {
     fetchBooksCategories()
   }, [])
 
+  useEffect(() => {
+    if (booksWithShelf[id]) {
+      setShelfCategory(booksWithShelf[id])
+    } else {
+      setShelfCategory({})
+    }
+  }, [booksWithShelf[id]])
+
   const onChangeShelfName = (event) => setShelfName(event.target.value)
 
   const handleChangeShelfCategory = (event) => {
     const shelfId = event.target.value
     addBookToShelf(bookDetails, shelfId)
-  }
-
-  const bookId = bookDetails.id
-  if (booksWithShelf[bookId]) {
-    return (
-      <FormControl className={classes.formControl}>
-        <InputLabel htmlFor='age-native-simple'>Slected shelf</InputLabel>
-        <Select native disabled value={booksWithShelf[bookId]}>
-        <option aria-label='None' value='' />
-          <option aria-label='None' value={booksWithShelf[bookId]}>
-            {booksWithShelf[bookId].name}
-          </option>
-        </Select>
-      </FormControl>
-    )
   }
 
   return (
@@ -63,10 +57,15 @@ const AddToShelf = () => {
       <Select
         native
         onChange={handleChangeShelfCategory}
-        value={shelfCategory.id}>
+        disabled={!!booksWithShelf[id]}
+        value={shelfCategory.id ? shelfCategory.id : ''}>
         <option aria-label='None' value='' />
-        {shelves?.map(({ id, name }) => (
-          <option key={id} value={id} id={id}>
+        {shelves?.map(({ id, name, category }) => (
+          <option
+            key={id}
+            value={id}
+            id={id}
+            disabled={category.id ? categoryName !== category.name : false}>
             {name}
           </option>
         ))}
