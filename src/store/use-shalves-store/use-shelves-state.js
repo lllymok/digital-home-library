@@ -53,7 +53,6 @@ const reducer = (state, { type, payload }) => {
         booksWithShelf: { ...state.booksWithShelf, ...payload },
       }
       case 'SEND_SHELF_REVIEW':
-        console.log(payload, 'payload')
         return {
           ...state,
           shelfReviews: { ...state.shelfReviews, ...payload },
@@ -67,7 +66,6 @@ const reducer = (state, { type, payload }) => {
 
 const useShelvesState = () => {
   const [state, dispatch] = useReducer(reducer, initialState)
-  console.log(state, 'staet')
 
   const createShelf = (shelfDetails) => {
     dispatch({
@@ -126,7 +124,6 @@ const useShelvesState = () => {
   const fetchShelfDetails = async (id) => {
     try {
       const data = state.shelves.find((item) => item.id === id)
-      console.log(data, 'data')
       dispatch({ type: 'FETCH_SHELF_DETAILS', payload: data })
     } catch (e) {
       console.log(e, 'e')

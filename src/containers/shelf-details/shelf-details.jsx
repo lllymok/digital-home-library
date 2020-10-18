@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { GlobalContext } from '../../store'
-import { AddReview, Reviews } from '../../@shared/components'
+import { useReviews } from '../../@shared/hooks'
 
 const ShelfDetails = () => {
   const { id } = useParams()
@@ -13,15 +13,18 @@ const ShelfDetails = () => {
     fetchShelfDetails,
   } = useContext(GlobalContext).shelvesStore
 
-  useEffect(() => {
-    fetchShelfDetails(id)
-  }, [])
-
-  const { name } = shelfDetails
-
   const handleReview = (review) => {
     sendShelfReview(id, review)
   }
+
+  const { AddReview, Reviews } = useReviews(handleReview, shelfReviews[id])
+
+
+  useEffect(() => {
+    fetchShelfDetails(id)
+  }, [])
+  
+  const { name } = shelfDetails
 
   return (
     <div>
