@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 
-import Book from './book'
 import { GlobalContext } from '../../../store'
+import { Book } from '../../../@shared/components'
 
 const BooksList = () => {
   const { books } = useContext(GlobalContext).booksStore
@@ -18,5 +18,9 @@ const BooksList = () => {
 export default BooksList
 
 const Container = styled.div`
-  display: flex;
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-columns: 130px 130px 130px 130px 130px;
+  grid-column-gap: 32px;
+  grid-row-gap: 16px;
 `

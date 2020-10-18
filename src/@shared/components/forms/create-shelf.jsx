@@ -27,7 +27,6 @@ const CreateShelfForm = ({ onClose }) => {
   const { createShelf } = shelvesStore
   const { booksCategories } = booksStore
 
-
   const classes = useStyles()
 
   const [shelfName, setShelfName] = useState('')
@@ -51,8 +50,8 @@ const CreateShelfForm = ({ onClose }) => {
   const isDisabled = shelfName.length > 0
 
   return (
-    <div>
-      <h2 id='simple-modal-title'>Create the Shelf</h2>
+    <Container>
+      <h3 id='simple-modal-title'>Create shelf</h3>
       <InputContainer>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor='age-native-simple'>Shelf name</InputLabel>
@@ -79,17 +78,30 @@ const CreateShelfForm = ({ onClose }) => {
       </InputContainer>
 
       <Button
+        className='add-shelf'
         disabled={!isDisabled}
         variant='contained'
         color='primary'
         onClick={addShelf}>
-        Add shelf
+        Create
       </Button>
-    </div>
+    </Container>
   )
 }
 
 export default CreateShelfForm
+
+const Container = styled.div`
+  padding: 18px;
+  .add-shelf {
+    text-transform: inherit;
+    height: 28px;
+    width: 100%;
+    margin-top: 8px;
+    background: ${({ theme }) => theme.backgroundHeader};
+ 
+  }
+`
 
 const InputContainer = styled.div`
   display: flex;

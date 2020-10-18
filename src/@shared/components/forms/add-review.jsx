@@ -7,6 +7,7 @@ import {
   InputLabel,
   Button,
 } from '@material-ui/core'
+import styled from 'styled-components'
 
 const AddReview = ({ sendReview }) => {
   const [review, setReview] = useState('')
@@ -22,33 +23,91 @@ const AddReview = ({ sendReview }) => {
 
   const handleClick = () => {
     sendReview({ review, rating })
-    clearData();
+    clearData()
   }
 
+  const isDisabled = !review.length
+
   return (
-    <>
-      {/* {render({ review, rating }, clearData)} */}
+    <Container>
+      <LabelCotainer>
+        <Label>Add review</Label>
+      </LabelCotainer>
       <div>
-        <Box component='fieldset' mb={3} borderColor='transparent'>
-          <Typography component='legend'>Controlled</Typography>
+        <RatingContainer>
+          <Label1>Rating</Label1>
           <Rating
             name='simple-controlled'
+            className='rating'
             value={rating}
             onChange={(event, newValue) => onChangeRating(newValue)}
           />
-        </Box>
-        <InputLabel htmlFor='age-native-simple'>Shelf name</InputLabel>
+        </RatingContainer>
+        <Label1>Your review</Label1>
         <TextareaAutosize
+          className='review'
           onChange={onChagngeReview}
           value={review}
           aria-label='minimum height'
           rowsMin={3}
-          placeholder='Minimum 3 rows'
+          placeholder='Type here you review'
         />
-        <Button onClick={handleClick}>Send review</Button>
+        <Button
+          className='add-shelf'
+          disabled={isDisabled}
+          variant='contained'
+          color='primary'
+          onClick={handleClick}>
+          Send review
+        </Button>
       </div>
-    </>
+    </Container>
   )
 }
 
 export default AddReview
+
+const Container = styled.div`
+  .add-shelf {
+    text-transform: inherit;
+    height: 28px;
+    margin-top: 8px;
+    background: ${({ theme }) => theme.backgroundHeader};
+  }
+  .review {
+    width: 100%;
+    border: 2px solid #e7ebf2;
+    font-size: 14px;
+    padding: 10px;
+    padding-top: 8px;
+    border-radius: 8px;
+  }
+  padding-bottom: 24px;
+  border-bottom: solid 1px #ddeaf5;
+`
+
+const RatingContainer = styled.div`
+  margin-bottom: 8px;
+  .rating {
+    padding: 0px;
+  }
+`
+const Label1 = styled.div`
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  color: inherit;
+  margin-bottom: 8px;
+`
+
+const LabelCotainer = styled.div`
+  padding: 18px 24px 18px 0px;
+`
+const Label = styled.div`
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 28px;
+  color: #777b8d;
+  color: #777b8d;
+  text-transform: inherit;
+`

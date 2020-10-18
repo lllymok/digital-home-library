@@ -6,19 +6,21 @@ import { countRatingAverage } from '../../@shared/helpers'
 const initialState = {
   shelves: [
     {
-      id: 'b768d286-9eea-4add-8d07-733275fee056',
-      name: 'Level2',
+      id: 'bfba9d9e-a156-4b95-bd28-e75c2ea1fd56',
+      books: [],
+      name: 'classs ',
       category: {
-        id: 2,
-        name: 'fantasy',
+        id: 5,
+        name: 'horror',
       },
     },
     {
-      id: 'df1977ad-2a0e-40ff-9b16-d30ee433d4fb',
-      name: 'level1',
+      id: 'c5238ef9-da51-41dc-9417-84f36fafe737',
+      books: [],
+      name: 'new Shelf',
       category: {
-        id: 2,
-        name: 'fantasy',
+        id: 3,
+        name: 'classics',
       },
     },
   ],
@@ -52,11 +54,11 @@ const reducer = (state, { type, payload }) => {
         ...state,
         booksWithShelf: { ...state.booksWithShelf, ...payload },
       }
-      case 'SEND_SHELF_REVIEW':
-        return {
-          ...state,
-          shelfReviews: { ...state.shelfReviews, ...payload },
-        }
+    case 'SEND_SHELF_REVIEW':
+      return {
+        ...state,
+        shelfReviews: { ...state.shelfReviews, ...payload },
+      }
 
     default: {
       return state
@@ -130,7 +132,13 @@ const useShelvesState = () => {
     }
   }
 
-  return { ...state, createShelf, addBookToShelf, sendShelfReview, fetchShelfDetails }
+  return {
+    ...state,
+    createShelf,
+    addBookToShelf,
+    sendShelfReview,
+    fetchShelfDetails,
+  }
 }
 
 export default useShelvesState

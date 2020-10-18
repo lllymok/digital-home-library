@@ -52,7 +52,7 @@ const AddToShelf = () => {
   }
 
   return (
-    <FormControl className={classes.formControl}>
+    <FormControl className={`${classes.formControl} form-control`}>
       <InputLabel htmlFor='age-native-simple'>Add to shelf</InputLabel>
       <Select
         native

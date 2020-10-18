@@ -12,9 +12,7 @@ import Shelves from './shelves/shelves'
 import ShelvesList from './shelves-list/shelf-list'
 import ShelfDetails from './shelf-details/shelf-details'
 
-import {
-  GlobalContext,
-} from '../store'
+import { GlobalContext } from '../store'
 
 const Main = () => {
   const { isLightTheme } = useContext(GlobalContext).global
@@ -23,18 +21,25 @@ const Main = () => {
     <ThemeProvider theme={!isLightTheme ? darkTheme : lightTheme}>
       <>
         <GlobalStyles />
-            <Router>
-              <Header />
-              <Wrapper>
-                <Switch>
-                  <Route exact path='/' component={MainPage} />
-                  <Route path='/books/details/:id' component={BookDetails} />
-                  <Route path='/shelves' component={Shelves} />
-                  <Route exact path='/shelves-with-reviews' component={ShelvesList} />
-                  <Route path='/shelves-with-reviews/:id' component={ShelfDetails} />
-                </Switch>
-              </Wrapper>
-            </Router>
+        <Router>
+          <Header />
+          <Wrapper>
+              <Switch>
+                <Route exact path='/' component={MainPage} />
+                <Route path='/books/details/:id' component={BookDetails} />
+                <Route path='/shelves' component={Shelves} />
+                <Route
+                  exact
+                  path='/shelves-with-reviews'
+                  component={ShelvesList}
+                />
+                <Route
+                  path='/shelves-with-reviews/:id'
+                  component={ShelfDetails}
+                />
+              </Switch>
+          </Wrapper>
+        </Router>
       </>
     </ThemeProvider>
   )
@@ -43,6 +48,12 @@ const Main = () => {
 export default Main
 
 const Wrapper = styled.div`
-  width: 1200px;
-  margin: 0 auto;
+  margin-left: 200px;
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 1060px;
+  margin-left: auto;
+  margin-right: auto;
+  min-height: 100vh;
+  padding-top: 36px;
 `

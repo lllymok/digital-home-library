@@ -4,14 +4,14 @@ import { Link } from 'react-router-dom'
 
 const Book = ({ name, img, id }) => {
   return (
-    <Link to={`/books/details/${id}`}>
+    <LinkContainer to={`/books/details/${id}`}>
       <Container>
         <ImgContainer>
           <img src={img} />
         </ImgContainer>
         <Title>{name}</Title>
       </Container>
-    </Link>
+    </LinkContainer>
   )
 }
 
@@ -27,11 +27,26 @@ const Container = styled.div`
 const ImgContainer = styled.div`
   height: 160px;
   width: 130px;
+  img {
+    height: 100%;
+    width: 100%;
+  }
+`
+
+const LinkContainer = styled(Link)`
+  text-decoration: none;
 `
 
 const Title = styled.div`
+  padding: 10px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: rgba(0, 0, 0, 0.87);
+  font-size: 0.875rem;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: 400;
   line-height: 1.5;
+  letter-spacing: 0.01071em;
   letter-spacing: 0.01071em;
 `
