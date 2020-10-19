@@ -33,7 +33,7 @@ const MainPage = () => {
       <Content>
         <WrapperDetails>
           <ImageContainer>
-            <img src='https://res.cloudinary.com/dwqxoowxi/ar_0.81,c_fill/f_auto,q_auto,dpr_auto,c_scale,w_auto/55acf182b36e4f72a33016ecbc22001d' />
+            <img src={img} />
           </ImageContainer>
           <Details>
             <RatingContainer>
