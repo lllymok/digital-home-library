@@ -42,7 +42,8 @@ const Title = styled.div`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  color: rgba(0, 0, 0, 0.87);
+  color: ${({ theme }) => theme.headTitle};
+  background-color: ${({ theme }) => theme.bookBackground};
   font-size: 0.875rem;
   font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: 400;

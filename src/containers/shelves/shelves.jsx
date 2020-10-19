@@ -63,7 +63,7 @@ const Category = styled.div`
   font-size: 12px;
   font-weight: 600;
   line-height: 20px;
-  color: inherit;
+  color: ${({ theme }) => theme.headTitle};
 `
 
 const Label = styled.div`

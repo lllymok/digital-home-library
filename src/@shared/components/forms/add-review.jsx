@@ -1,12 +1,6 @@
 import React, { useState } from 'react'
 import { Rating } from '@material-ui/lab'
-import {
-  TextareaAutosize,
-  Box,
-  Typography,
-  InputLabel,
-  Button,
-} from '@material-ui/core'
+import { TextareaAutosize, Button } from '@material-ui/core'
 import styled from 'styled-components'
 
 const AddReview = ({ sendReview }) => {
@@ -72,7 +66,7 @@ const Container = styled.div`
     text-transform: inherit;
     height: 28px;
     margin-top: 8px;
-    background: ${({ theme }) => theme.backgroundHeader};
+    background: ${({ theme }) => theme.buttonColor};
   }
   .review {
     width: 100%;
@@ -96,7 +90,7 @@ const Label1 = styled.div`
   font-size: 12px;
   font-weight: 600;
   line-height: 20px;
-  color: inherit;
+  color: ${({ theme }) => theme.headTitle};
   margin-bottom: 8px;
 `
 

@@ -51,7 +51,7 @@ const CreateShelfForm = ({ onClose }) => {
 
   return (
     <Container>
-      <h3 id='simple-modal-title'>Create shelf</h3>
+      <h3 className="headTitle" id='simple-modal-title'>Create shelf</h3>
       <InputContainer>
         <FormControl className={classes.formControl}>
           <InputLabel htmlFor='age-native-simple'>Shelf name</InputLabel>
@@ -93,12 +93,15 @@ export default CreateShelfForm
 
 const Container = styled.div`
   padding: 18px;
+  .headTitle {
+    color: ${({ theme }) => theme.headTitle};
+  }
   .add-shelf {
     text-transform: inherit;
     height: 28px;
     width: 100%;
     margin-top: 8px;
-    background: ${({ theme }) => theme.backgroundHeader};
+    background: ${({ theme }) => theme.buttonColor};
  
   }
 `

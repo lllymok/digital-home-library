@@ -37,6 +37,6 @@ const Container = styled.div`
     margin-top: 18px;
     text-transform: inherit;
     width: 100%;
-    color: ${({ theme }) => theme.backgroundHeader};
+    color: ${({ theme }) => theme.buttonColor};
   }
 `

@@ -84,7 +84,6 @@ const Label = styled.div`
   font-weight: 600;
   line-height: 20px;
   color: #777b8d;
-  color: #777b8d;
   text-transform: inherit;
   margin-right: 8px;
 `
@@ -93,7 +92,7 @@ const Category = styled.div`
   font-size: 12px;
   font-weight: 600;
   line-height: 20px;
-  color: inherit;
+  color: ${({ theme }) => theme.headTitle};
 `
 const BookName = styled.div`
   margin-top: 26px;

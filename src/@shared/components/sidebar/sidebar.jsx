@@ -1,24 +1,26 @@
 import React from 'react'
 import styled from 'styled-components'
-import { NavLink } from 'react-router-dom'
+import { NavLink, Route } from 'react-router-dom'
 
 import { AddToShelf } from '../../../@shared/components'
 
 const Sidebar = () => {
   return (
     <Container>
-      <SidebarWrapper>
-        <StyledNavLink exact activeClassName='active' to='/'>
-          <ButtonNavigation>Books</ButtonNavigation>
-        </StyledNavLink>
-        <StyledNavLink activeClassName='active' to='/shelves'>
-          <ButtonNavigation>Shelves</ButtonNavigation>
-        </StyledNavLink>
-        <StyledNavLink activeClassName='active' to='/shelves-with-reviews'>
-          <ButtonNavigation>Shelves with Reviews</ButtonNavigation>
-        </StyledNavLink>
-      </SidebarWrapper>
-      <AddToShelf />
+      <Route>
+        <SidebarWrapper>
+          <StyledNavLink exact activeClassName='active' to='/'>
+            <ButtonNavigation>Books</ButtonNavigation>
+          </StyledNavLink>
+          <StyledNavLink activeClassName='active' to='/shelves'>
+            <ButtonNavigation>Shelves</ButtonNavigation>
+          </StyledNavLink>
+          <StyledNavLink activeClassName='active' to='/shelves-with-reviews'>
+            <ButtonNavigation>Shelves with Reviews</ButtonNavigation>
+          </StyledNavLink>
+        </SidebarWrapper>
+        <AddToShelf />
+      </Route>
     </Container>
   )
 }
@@ -32,10 +34,10 @@ const ButtonNavigation = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  color: ${({ theme }) => theme.backgroundHeader};
+  color: ${({ theme }) => theme.textHover};
   :hover {
-    background-color: ${({ theme }) => theme.textHover};
-    color: ${({ theme }) => theme.textColor};
+    background-color: ${({ theme }) => theme.buttonHover};
+    color: ${({ theme }) => theme.buttonText};
   }
 `
 
@@ -43,19 +45,20 @@ const StyledNavLink = styled(NavLink)`
   font-size: 14px;
   font-weight: 600;
   line-height: 22px;
-  color: inherit;
+  color: ${({ theme }) => theme.textColor};
   text-transform: inherit;
   text-decoration: none;
   &.active {
     ${ButtonNavigation} {
-      background-color: ${({ theme }) => theme.backgroundHeader};
-      color: ${({ theme }) => theme.textColor};
+      background-color: ${({ theme }) => theme.buttonColor};
+      color: ${({ theme }) => theme.buttonText};
     }
   }
 `
 
 const Container = styled.div`
   width: 200px;
+  background-color: #fff;
   flex-shrink: 0;
   white-space: nowrap;
   padding-top: 76px;

@@ -4,7 +4,7 @@ import { ThemeProvider } from 'styled-components'
 import styled from 'styled-components'
 
 import { GlobalStyles, lightTheme, darkTheme } from '../@shared/styled'
-import { Header } from '../@shared/components'
+import { Header, Footer } from '../@shared/components'
 
 import MainPage from './main-page/main-page'
 import BookDetails from './book-details/book-details'
@@ -39,6 +39,7 @@ const Main = () => {
                 />
               </Switch>
           </Wrapper>
+          <Footer />
         </Router>
       </>
     </ThemeProvider>

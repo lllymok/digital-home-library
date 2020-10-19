@@ -24,6 +24,7 @@ const ReviewContainer = styled.div`
 
 const Container = styled.div`
   margin-top: 12px;
+  padding-bottom: 24px;
   ${ReviewContainer} {
     :not(:last-child) {
       border-bottom: solid 1px #ddeaf5;
@@ -33,4 +34,5 @@ const Container = styled.div`
 `
 const Review = styled.div`
   margin-left: 4px;
+  color: ${({ theme }) => theme.headTitle};
 `

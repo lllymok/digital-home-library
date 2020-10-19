@@ -35,7 +35,6 @@ const IconContainer = styled.div`
  width: 137px;
  height 42px;
  svg {
-   /* height: 100%; */
    width: 100%;
    path {
      fill: ${({ theme }) => theme.logo}
